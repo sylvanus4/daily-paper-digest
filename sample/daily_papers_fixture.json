@@ -1,0 +1,77 @@
+[
+  {
+    "paper": {
+      "id": "2401.00001",
+      "title": "Efficient Attention Mechanisms for Long-Context Language Models",
+      "summary": "We introduce a linear-complexity attention variant that preserves accuracy on long-context benchmarks while reducing memory footprint by 40%. The method requires no retraining of existing checkpoints and integrates as a drop-in replacement for standard scaled dot-product attention. Extensive experiments on documents up to 128k tokens show competitive perplexity with substantially lower latency.",
+      "upvotes": 142,
+      "authors": [
+        {"name": "A. Researcher"},
+        {"name": "B. Scientist"}
+      ]
+    },
+    "publishedAt": "2026-07-09T18:00:00.000Z"
+  },
+  {
+    "paper": {
+      "id": "2401.00002",
+      "title": "Self-Rewarding Agents: Bootstrapping Reasoning Without Human Labels",
+      "summary": "This work proposes a self-rewarding loop in which an agent generates candidate solutions, critiques them against verifiable checks, and fine-tunes on the surviving traces. Across math and code benchmarks the approach improves pass@1 by 11 points without any human-annotated reward data. We analyze failure modes and show that verifier quality, not model scale, is the dominant factor.",
+      "upvotes": 98,
+      "authors": [
+        {"name": "C. Engineer"}
+      ]
+    },
+    "publishedAt": "2026-07-09T12:30:00.000Z"
+  },
+  {
+    "paper": {
+      "id": "2401.00003",
+      "title": "A Practical Survey of Quantization for On-Device Inference",
+      "summary": "We survey post-training and quantization-aware methods for running transformer models on consumer hardware. The paper compares INT8, INT4, and mixed-precision schemes across accuracy, throughput, and energy, and offers a decision guide for practitioners choosing a quantization strategy under a fixed latency budget.",
+      "upvotes": 76,
+      "authors": [
+        {"name": "D. Author"},
+        {"name": "E. Coauthor"}
+      ]
+    },
+    "publishedAt": "2026-07-08T20:15:00.000Z"
+  },
+  {
+    "paper": {
+      "id": "2401.00004",
+      "title": "Retrieval-Augmented Generation Revisited: When Does It Actually Help?",
+      "summary": "Through controlled ablations we isolate the conditions under which retrieval augmentation improves factual accuracy versus when it merely adds latency. We find that retrieval helps most for tail knowledge and long-lived facts, but can hurt on reasoning-heavy tasks where retrieved passages distract the model. We release an evaluation harness for measuring the retrieval-utility tradeoff.",
+      "upvotes": 64,
+      "authors": [
+        {"name": "F. Investigator"}
+      ]
+    },
+    "publishedAt": "2026-07-08T09:45:00.000Z"
+  },
+  {
+    "paper": {
+      "id": "2401.00005",
+      "title": "Distillation at Scale: Small Models That Punch Above Their Weight",
+      "summary": "We present a distillation recipe combining sequence-level knowledge distillation with targeted data curation to produce compact models that match teachers 5x their size on instruction-following benchmarks. The paper details the data-mixing schedule and provides open weights for reproduction.",
+      "upvotes": 51,
+      "authors": [
+        {"name": "G. Distiller"},
+        {"name": "H. Curator"}
+      ]
+    },
+    "publishedAt": "2026-07-07T14:00:00.000Z"
+  },
+  {
+    "paper": {
+      "id": "2401.00006",
+      "title": "Toward Reliable Tool Use in Autonomous Agents",
+      "summary": "We study why agents mis-call tools and propose a lightweight schema-validation and repair layer that reduces malformed tool calls by 63%. The approach is model-agnostic and requires no changes to the underlying policy.",
+      "upvotes": 33,
+      "authors": [
+        {"name": "I. Toolsmith"}
+      ]
+    },
+    "publishedAt": "2026-07-07T08:00:00.000Z"
+  }
+]

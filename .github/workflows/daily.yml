@@ -1,0 +1,56 @@
+name: daily-digest
+
+on:
+  schedule:
+    # 23:00 UTC daily — after Hugging Face refreshes its daily papers list.
+    - cron: "0 23 * * *"
+  workflow_dispatch:
+    inputs:
+      top:
+        description: "Number of papers"
+        required: false
+        default: "5"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-digest
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # No third-party imports are required at runtime (pure stdlib), but we
+      # install requirements.txt so the environment matches the documented setup.
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate digest
+        env:
+          # Optional: set this repo secret to enable AI-assisted summaries.
+          # If unset, the digest degrades to metadata + abstract (still valid).
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python3 digest.py --top "${{ github.event.inputs.top || '5' }}"
+
+      - name: Commit new digest
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "docs: daily paper digest $(date -u +%Y-%m-%d)"
+            git push
+          fi

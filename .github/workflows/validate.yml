@@ -1,0 +1,39 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Compile check
+        run: python3 -m py_compile digest.py
+
+      - name: Run in offline degraded mode (must emit a file)
+        # --offline forces the bundled sample fixture, so CI never fails just
+        # because Hugging Face / arXiv is unreachable from the runner.
+        run: |
+          python3 digest.py --top 3 --offline --date 2026-01-01 --out docs
+          test -f docs/2026-01-01.md
+          echo "----- generated digest (head) -----"
+          head -n 20 docs/2026-01-01.md
+          # Sanity: template header present and no key required.
+          grep -q "Daily Paper Digest — 2026-01-01" docs/2026-01-01.md
+
+      - name: Clean up CI artifact
+        if: always()
+        run: rm -f docs/2026-01-01.md
